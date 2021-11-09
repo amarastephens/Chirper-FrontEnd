@@ -1,0 +1,13 @@
+#timeline-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#timeline-container > div {
+    border: 1px solid black;
+    padding: 1em;
+    margin: 1em;
+    width: 15em;
+}

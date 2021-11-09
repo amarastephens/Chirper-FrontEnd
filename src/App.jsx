@@ -1,43 +1,72 @@
 import React, { useState } from 'react';
-import Feed from "./components/Feed"
+import moment from 'moment';
+import { v4 as uuidv4 } from 'uuid';
+import Chirp from "./components/Chirp";
 
+const App = () => {
+    const [username, setUsername] = useState("");
+    const [message, setMessage] = useState("");
+    const [chirps, setChirps] = useState([
+        {
+            key: uuidv4(),
+            timestamp: moment().format('MMMM Do YYYY, h:mm:ss a'),
+            username: "Josh",
+            message: "This is my chirp"
+        },
+        {
+            key: uuidv4(),
+            timestamp: moment().format('MMMM Do YYYY, h:mm:ss a'),
+            username: "Josh",
+            message: "This is my chirp"
+        },
+        {
+            key: uuidv4(),
+            timestamp: moment().format('MMMM Do YYYY, h:mm:ss a'),
+            username: "Josh",
+            message: "This is my chirp"
+        }
+    ]);
 
-let App = () => {
-  let [username, setUsername] = useState('');
-  let [msg, setMsg] = useState('');
-  let [chirps, setChirps] = useState([
-    { username: 'Freddie:', msg: "So you think you can stop me and spit in my eye?" },
-    { username: 'Elton:', msg: "Bennie and the jets" },
-    { username: 'Robert Plant:', msg: 'Buying a stairway to heaven' },
-  ]);
+    const handleUsernameChange = (e) => setUsername(e.target.value);
+    const handleMessageChange = (e) => setMessage(e.target.value);
+    const handleClick = () => {
+        const newChirp = {
+            key: uuidv4(),
+            timestamp: moment().format('MMMM Do YYYY, h:mm:ss a'),
+            username: username,
+            message: message
+        };
 
-  let handleSubmit = (e) => {
-    //need this line to stop page refresh
-    e.preventDefault();
-    let newChirp = {
-      username: username,
-      msg: msg,
-    };
+        setChirps([...chirps, newChirp])
+    }
 
-    //redefines existing chirps array and adds newChirp object 
-    setChirps([...chirps, newChirp]);
-  };
+    return (
+        <>
+            <h1>Chirper</h1>
 
-  return (
-    <>
-      <div className="container">
-        <form className="bg-primary m-3 py-4  rounded shadow d-flex justify-content-center make-chirps">
-          <input className="m-2" type="text" placeholder="What's your name?" value={username} onChange={(e) => setUsername(e.target.value)} />
-          <input className="m-2" type="text" placeholder="What's on your mind?" value={msg} onChange={(e) => setMsg(e.target.value)} />
-          <input className="m-2" type="submit" value="Submit" onClick={(e) => handleSubmit(e)} />
-        </form>
-      </div>
-      {chirps.map((chirp, id) => <Feed chirp={chirp} />)}
+            <label htmlFor="username-input">Who are you?</label>
+            <input
+                type="text"
+                name="username-input"
+                id=""
+                value={username}
+                onChange={handleUsernameChange}
+            />
+            <label htmlFor="message-input">What do you want to say?</label>
+            <textarea
+                name="message-input"
+                cols="30"
+                rows="10"
+                value={message}
+                onChange={handleMessageChange}
+            ></textarea>
+            <button onClick={handleClick}>Submit</button>
 
-      
+            <div id="timeline-container">
+                {chirps.map(chirp => <Chirp chirp={chirp} pizza="yyayyy pizza"/>)}
+            </div>
+        </>
+    )
+}
 
-    </>
-  );
-};
-
-export default App;
+export default App
