@@ -10,20 +10,20 @@ const App = () => {
         {
             key: uuidv4(),
             timestamp: moment().format('MMMM Do YYYY, h:mm:ss a'),
-            username: "Josh",
-            message: "This is my chirp"
+            username: "Freddie Mercury",
+            message: "So you think you can stop me and spit in my eye?"
         },
         {
             key: uuidv4(),
             timestamp: moment().format('MMMM Do YYYY, h:mm:ss a'),
-            username: "Josh",
-            message: "This is my chirp"
+            username: "Elton John",
+            message: "I hope you don't mind that I put down into words.."
         },
         {
             key: uuidv4(),
             timestamp: moment().format('MMMM Do YYYY, h:mm:ss a'),
-            username: "Josh",
-            message: "This is my chirp"
+            username: "Robert Plant",
+            message: "Going to California with an aching in my heart"
         }
     ]);
 
